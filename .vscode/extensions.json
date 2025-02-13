@@ -1,8 +1,8 @@
 {
-  "recommendations": [
-    "Vue.volar",
-    "EditorConfig.EditorConfig",
-    // "dbaeumer.vscode-eslint",
-    // "vitest.explorer"
-  ]
+	"recommendations": [
+		"Vue.volar",
+		"EditorConfig.EditorConfig"
+		// "dbaeumer.vscode-eslint",
+		// "vitest.explorer"
+	]
 }
