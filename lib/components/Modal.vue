@@ -12,7 +12,10 @@
 	</Teleport>
 </template>
 
-<script lang="ts" setup>
+<script
+	lang="ts"
+	setup
+>
 import { createModal } from "@/composables/createModal.ts";
 
 defineOptions({
@@ -20,7 +23,7 @@ defineOptions({
 });
 
 const { disabled = false } = defineProps<{
-	disabled?: boolean
+	disabled?: boolean,
 }>();
 
 const opened = defineModel("open", {
@@ -29,7 +32,7 @@ const opened = defineModel("open", {
 });
 
 const {
-    rendered,
+	rendered,
 	to,
 	close,
 	syncModalState,

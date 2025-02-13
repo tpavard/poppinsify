@@ -1,23 +1,23 @@
 import {
-	type Ref,
 	computed,
-	watch,
 	onBeforeUnmount,
 	readonly,
+	type Ref,
+	watch,
 } from "vue";
 
 import {
-	id,
-	to,
-	currentKey,
-	nextKey,
-	isHidden,
-	isActive,
-	close,
 	activate,
+	bind,
+	close,
+	currentKey,
 	deactivate,
 	dismissAllBut,
-	bind,
+	id,
+	isActive,
+	isHidden,
+	nextKey,
+	to,
 	unbind,
 } from "@/composables/modalState.ts";
 

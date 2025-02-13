@@ -10,7 +10,7 @@
 			:id
 			:close
 		>
-			<div :id/>
+			<div :id />
 		</slot>
 	</Transition>
 	<slot
@@ -18,11 +18,14 @@
 		:id
 		:close
 	>
-		<div :id/>
+		<div :id />
 	</slot>
 </template>
 
-<script lang="ts" setup>
+<script
+	lang="ts"
+	setup
+>
 import { createModalManager } from "@/composables/createModalManager.ts";
 
 defineOptions({

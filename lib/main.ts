@@ -1,12 +1,12 @@
-import { createModalManager } from "@/composables/createModalManager.ts";
 import { createModal } from "@/composables/createModal.ts";
+import { createModalManager } from "@/composables/createModalManager.ts";
 
-import ModalManager from "@/components/ModalManager.vue";
 import Modal from "@/components/Modal.vue";
+import ModalManager from "@/components/ModalManager.vue";
 
 export {
-	createModalManager,
 	createModal,
-	ModalManager,
+	createModalManager,
 	Modal,
+	ModalManager,
 };
