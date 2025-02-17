@@ -9,6 +9,7 @@
 			v-if="isActive"
 			:id
 			:close
+			:data="current?.data || null"
 		>
 			<div :id />
 		</slot>
@@ -17,33 +18,41 @@
 		v-else-if="isActive"
 		:id
 		:close
+		:data="current?.data || null"
 	>
 		<div :id />
 	</slot>
+	<component
+		v-if="current?.component"
+		v-bind="current.data"
+		:is="current.component"
+		noBinding
+		open
+	/>
 </template>
 
-<script
-	lang="ts"
-	setup
->
-import { createModalManager } from "@/composables/createModalManager.ts";
+<script lang="ts" setup>
+import { setupModalManager } from "#composables/setupModalManager.ts";
 
 defineOptions({
 	inheritAttrs: false,
 });
 
-const { transitionOff = false } = defineProps<{
+const {
+	transitionOff = false,
+} = defineProps<{
 	transitionOff?: boolean,
 }>();
 
 const {
+	current,
 	id,
 	isActive,
 	isHidden,
 	swap,
-	close,
+	closeAllModals: close,
 	swapOn,
-} = createModalManager();
+} = setupModalManager();
 
 swapOn(() => transitionOff && isHidden.value);
 </script>

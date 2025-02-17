@@ -12,18 +12,19 @@
 	</Teleport>
 </template>
 
-<script
-	lang="ts"
-	setup
->
-import { createModal } from "@/composables/createModal.ts";
+<script lang="ts" setup>
+import { useModal } from "#composables/useModal.ts";
 
 defineOptions({
 	inheritAttrs: false,
 });
 
-const { disabled = false } = defineProps<{
+const {
+	disabled = false,
+	noBinding = false,
+} = defineProps<{
 	disabled?: boolean,
+	noBinding?: boolean,
 }>();
 
 const opened = defineModel("open", {
@@ -35,8 +36,5 @@ const {
 	rendered,
 	to,
 	close,
-	syncModalState,
-} = createModal();
-
-syncModalState(opened);
+} = useModal("slot", noBinding ? null : opened);
 </script>

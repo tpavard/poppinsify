@@ -6,15 +6,15 @@ import {
 } from "vue";
 
 import {
-	close,
-	currentKey,
+	closeAllModals,
+	current,
 	id,
 	isActive,
 	isHidden,
-	nextKey,
+	next,
 	reset,
 	swap,
-} from "@/composables/modalState.ts";
+} from "#composables/modalState.ts";
 
 function swapOn(callback?: () => boolean) {
 	const swapCondition = computed(callback || (() => isHidden.value));
@@ -26,17 +26,17 @@ function swapOn(callback?: () => boolean) {
 	}, { immediate: true });
 }
 
-export function createModalManager() {
+export function setupModalManager() {
 	onBeforeUnmount(reset);
 
 	return {
 		id,
-		currentKey: readonly(currentKey),
-		nextKey: readonly(nextKey),
+		current: readonly(current),
+		next: readonly(next),
 		isHidden: readonly(isHidden),
 		isActive,
+		closeAllModals,
 		swap,
-		close,
 		reset,
 		swapOn,
 	};
