@@ -17,15 +17,19 @@
 	"files": [
 		"/dist/"
 	],
+	"imports": {
+		"#*": "./lib/*"
+	},
 	"main": "./dist/main.js",
 	"types": "./dist/main.d.ts",
 	"scripts": {
-		"dev": "vite",
-		"build": "run-p type-check \"build-only {@}\" --",
+		"start": "vite",
+		"build": "run-p type-check \"bundle {@}\" --",
 		"preview": "vite preview",
 		"test:unit": "vitest",
-		"build-only": "vite build",
+		"bundle": "vite build",
 		"type-check": "vue-tsc --build",
+		"format": "dprint fmt",
 		"lint": "eslint . --fix"
 	},
 	"peerDependencies": {
