@@ -27,6 +27,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 dist/
+coverage/
 node_modules/
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux
