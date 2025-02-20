@@ -1,15 +1,16 @@
 import {
 	type Component,
 	type Ref,
+	type ShallowRef,
 	computed,
 	nextTick,
 	shallowRef,
 } from "vue";
 
 export type ModalData<T = Record<string, unknown>> = {
-	opened: Ref<boolean>,
+	opened: ShallowRef<boolean>,
 	component: Component | null,
-	data: T | null,
+	data: Ref<T | null>,
 };
 
 export const id = "m_" + Date.now().toString(36);
@@ -24,7 +25,14 @@ export const models = new Set<ModalData>();
 
 export const isActive = computed(() => !!current.value && !isHidden.value);
 
+export function isQueued(modal: ModalData) {
+	return [current.value, next.value].includes(modal);
+}
+
 export async function swap() {
+	if (!isHidden.value) {
+		return;
+	}
 	current.value = null;
 	await nextTick();
 	current.value = next.value;
@@ -43,6 +51,10 @@ function dismissAllBut(modal?: ModalData) {
 }
 
 export function activate(modal: ModalData) {
+	if (!modal?.opened || isQueued(modal)) {
+		return;
+	}
+
 	if (!current.value) {
 		current.value = modal;
 		isHidden.value = false;
@@ -55,7 +67,7 @@ export function activate(modal: ModalData) {
 }
 
 export function deactivate(modal: ModalData) {
-	if (![current.value, next.value].includes(modal)) {
+	if (!isQueued(modal)) {
 		return;
 	}
 

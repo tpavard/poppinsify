@@ -50,8 +50,8 @@ const {
 	isActive,
 	isHidden,
 	swap,
-	closeAllModals: close,
 	swapOn,
+	closeAllModals: close,
 } = setupModalManager();
 
 swapOn(() => transitionOff && isHidden.value);

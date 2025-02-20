@@ -27,8 +27,8 @@ const {
 	noBinding?: boolean,
 }>();
 
-const opened = defineModel("open", {
-	type: Boolean,
+const opened = defineModel<boolean>("open", {
+	required: true,
 	default: false,
 });
 
@@ -36,5 +36,5 @@ const {
 	rendered,
 	to,
 	close,
-} = useModal("slot", noBinding ? null : opened);
+} = useModal("custom", null, noBinding ? null : opened);
 </script>

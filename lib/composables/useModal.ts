@@ -26,42 +26,29 @@ import {
 
 import Modal from "#components/ModalWrapper.vue";
 
-function bindState(modal: ModalData, source?: Ref<boolean> | null) {
-	if (source) {
-		modal.opened = source;
-	}
+export function useModal<T extends Record<string, unknown>>(
+	mode?: Component | "custom" | null,
+	data?: Ref<T> | null,
+	stateRef?: Ref<boolean> | null,
+) {
+	const modal: ModalData<T> = {
+		opened: stateRef || shallowRef(false),
+		component: mode !== "custom" ? markRaw(mode || Modal) : null,
+		data: data || shallowRef(null),
+	};
+
+	const rendered = computed(() => modal === current.value);
 
 	bind(modal);
 	onBeforeUnmount(() => unbind(modal));
 
-	return watch(modal.opened, opened => {
+	watch(modal.opened, opened => {
 		if (opened) {
 			activate(modal);
 		} else {
 			deactivate(modal);
 		}
 	}, { immediate: true });
-}
-
-export function useModal<T extends Record<string, unknown>>(
-	mode?: Component | "slot" | "default" | null,
-	stateRef?: Ref<boolean> | null,
-) {
-	const resolvedMode = mode || "default";
-
-	const modal: ModalData<T> = {
-		opened: shallowRef(false),
-		component: null,
-		data: null,
-	};
-
-	const rendered = computed(() => modal === current.value);
-
-	if (resolvedMode !== "slot") {
-		modal.component = markRaw(resolvedMode === "default" ? Modal : resolvedMode);
-	}
-
-	bindState(modal, stateRef);
 
 	return {
 		id,
@@ -71,8 +58,8 @@ export function useModal<T extends Record<string, unknown>>(
 		isHidden: readonly(isHidden),
 		isActive,
 		rendered,
-		open(payload: T) {
-			modal.data = payload;
+		opened: modal.opened,
+		open() {
 			modal.opened.value = true;
 		},
 		close: closeAllModals,
