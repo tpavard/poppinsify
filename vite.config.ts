@@ -24,7 +24,7 @@ export default defineConfig(({ command, isPreview }) => {
 				vueDevTools(),
 			]
 			: [
-				dts({ tsconfigPath: "./tsconfig.app.json" }),
+				dts({ tsconfigPath: "./tsconfig.lib.json" }),
 				vue(),
 			],
 		resolve: {
