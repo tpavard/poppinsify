@@ -10,6 +10,7 @@ import {
 } from "vue";
 
 import {
+	type DataType,
 	type ModalData,
 	activate,
 	bind,
@@ -26,12 +27,12 @@ import {
 
 import Modal from "#components/ModalWrapper.vue";
 
-export function useModal<T extends Record<string, unknown>>(
+export function useModal<T extends DataType = null>(
 	mode?: Component | "custom" | null,
 	data?: Ref<T> | null,
 	stateRef?: Ref<boolean> | null,
 ) {
-	const modal: ModalData<T> = {
+	const modal: ModalData = {
 		opened: stateRef || shallowRef(false),
 		component: mode !== "custom" ? markRaw(mode || Modal) : null,
 		data: data || shallowRef(null),

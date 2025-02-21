@@ -31,6 +31,20 @@
 	/>
 </template>
 
+<script lang="ts">
+import type {
+	closeAllModals,
+	DataType,
+	id,
+} from "#composables/modalState.ts";
+
+export type SlotContext<T extends DataType = null> = {
+	close: typeof closeAllModals,
+	id: typeof id,
+	data: T | unknown,
+};
+</script>
+
 <script lang="ts" setup>
 import { setupModalManager } from "#composables/setupModalManager.ts";
 

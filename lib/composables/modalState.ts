@@ -7,7 +7,10 @@ import {
 	shallowRef,
 } from "vue";
 
-export type ModalData<T = Record<string, unknown>> = {
+export type DataTypeObject = Record<string, unknown>;
+export type DataType = DataTypeObject | null;
+
+export type ModalData<T extends DataType = DataTypeObject> = {
 	opened: ShallowRef<boolean>,
 	component: Component | null,
 	data: Ref<T | null>,

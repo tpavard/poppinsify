@@ -11,11 +11,7 @@ import {
 	shallowMount,
 } from "@vue/test-utils";
 
-import {
-	type Component,
-	type Ref,
-	nextTick,
-} from "vue";
+import { nextTick } from "vue";
 
 import {
 	activate,
@@ -30,15 +26,11 @@ import ModalManager from "#components/ModalManager.vue";
 
 vi.mock("#composables/modalState.ts", { spy: true });
 
-function mountModal(
-	mode?: Component | "custom" | null,
-	data?: Ref<Record<string, unknown>> | null,
-	stateRef?: Ref<boolean> | null,
-) {
+function mountModal() {
 	let result: ReturnType<typeof useModal>;
 	const wrapper = shallowMount({
 		setup() {
-			result = useModal(mode, data, stateRef);
+			result = useModal();
 			return () => null;
 		},
 	});
