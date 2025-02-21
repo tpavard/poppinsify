@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="open">Open</button>
+		<button @click="toggle">{{ opened ? "Close" : "Open" }}</button>
 	</div>
 </template>
 
@@ -9,9 +9,17 @@ import { ref } from "vue";
 
 import { useModal } from "#composables/useModal.ts";
 
-const modal = useModal(null, ref({ content: "blablabla..." }));
+const {
+	open,
+	close,
+	opened,
+} = useModal(null, ref({ content: "blablabla..." }));
 
-function open() {
-	modal.open();
+function toggle() {
+	if (opened.value) {
+		close();
+	} else {
+		open();
+	}
 }
 </script>
